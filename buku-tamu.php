@@ -115,10 +115,10 @@ include_once('templates/header.php');
 
                                 <td>
 
-                                    <button class="btn btn-success"
-                                        type="button">
+                                    <a class="btn btn-success"
+                                        href="edit-tamu.php?id=<?= $tamu['id_tamu']; ?>">
                                         Ubah
-                                    </button>
+                                    </a>
 
                                     <button class="btn btn-danger"
                                         type="button">
