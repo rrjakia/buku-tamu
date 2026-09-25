@@ -82,6 +82,7 @@ include_once('templates/header.php');
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID User</th>
                             <th>Username</th>
                             <th>User Role</th>
                             <th>Aksi</th>
@@ -100,9 +101,8 @@ include_once('templates/header.php');
 
                             <tr>
                                 <td><?= $no++; ?></td>
-
+                                <td><?= $user['id_user']; ?></td>
                                 <td><?= $user['username']; ?></td>
-
                                 <td><?= $user['user_role']; ?></td>
 
                                 <td>
