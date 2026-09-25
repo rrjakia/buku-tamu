@@ -30,10 +30,17 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Ready to Leave?
+                            </h5>
 
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <button class="close"
+                                type="button"
+                                data-dismiss="modal"
+                                aria-label="Close">
+
                                 <span aria-hidden="true">×</span>
+
                             </button>
                         </div>
 
@@ -42,13 +49,18 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">
+
+                            <button class="btn btn-secondary"
+                                type="button"
+                                data-dismiss="modal">
                                 Cancel
                             </button>
 
-                            <a class="btn btn-primary" href="login.html">
+                            <a class="btn btn-primary"
+                                href="login.html">
                                 Logout
                             </a>
+
                         </div>
 
                     </div>
@@ -79,6 +91,28 @@
                             $(this).remove();
                         });
                     }, 4000);
+                });
+            </script>
+
+            <script>
+                // auto hide notifikasi
+                $(document).ready(function() {
+                    window.setTimeout(function() {
+                        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                            $(this).remove();
+                        });
+                    }, 4000);
+                });
+
+                // ambil data id user dari tombol ganti password ke modal ganti password
+                $('#gantiPassword').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget);
+                    var id = button.data('id');
+
+                    console.log(id);
+
+                    var modal = $(this);
+                    modal.find('.modal-body #id_user').val(id);
                 });
             </script>
 
