@@ -9,6 +9,29 @@ include_once('templates/header.php');
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Data User</h1>
 
+    <?php
+    // jika ada tombol simpan
+    if (isset($_POST['simpan'])) {
+        if (tambah_user($_POST) > 0) {
+    ?>
+
+            <div class="alert alert-success" role="alert">
+                Data berhasil disimpan!
+            </div>
+
+        <?php
+        } else {
+        ?>
+
+            <div class="alert alert-danger" role="alert">
+                Data gagal disimpan!
+            </div>
+
+    <?php
+        }
+    }
+    ?>
+
     <!-- DataTables Example -->
     <div class="card shadow mb-4">
 
@@ -48,30 +71,38 @@ include_once('templates/header.php');
                     </thead>
 
                     <tbody>
+
                         <?php
-                        // penomoran auto-increment
                         $no = 1;
 
-                        // Query untuk memanggil semua data dari tabel users
                         $users = query("SELECT * FROM users");
 
                         foreach ($users as $user) :
                         ?>
+
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $user['username'] ?></td>
-                                <td><?= $user['user_role'] ?></td>
+
+                                <td><?= $user['username']; ?></td>
+
+                                <td><?= $user['user_role']; ?></td>
+
                                 <td>
                                     <a class="btn btn-success"
-                                        href="edit-user.php?id=<?= $user['id_user'] ?>">Ubah</a>
+                                        href="edit-user.php?id=<?= $user['id_user']; ?>">
+                                        Ubah
+                                    </a>
 
                                     <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
                                         class="btn btn-danger"
-                                        href="hapus-user.php?id=<?= $user['id_user'] ?>">Hapus</a>
+                                        href="hapus-user.php?id=<?= $user['id_user']; ?>">
+                                        Hapus
+                                    </a>
                                 </td>
                             </tr>
 
                         <?php endforeach; ?>
+
                     </tbody>
 
                 </table>
@@ -84,6 +115,134 @@ include_once('templates/header.php');
 
 </div>
 <!-- /.container-fluid -->
+
+
+<!-- Modal Tambah User -->
+<div class="modal fade"
+    id="tambahModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="tambahModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tambahModalLabel">
+                    Tambah User
+                </h5>
+
+                <button type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close">
+
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+
+                </button>
+
+            </div>
+
+            <form method="post" action="">
+
+                <div class="modal-body">
+
+                    <div class="form-group row">
+
+                        <label for="username"
+                            class="col-sm-3 col-form-label">
+                            Username
+                        </label>
+
+                        <div class="col-sm-8">
+
+                            <input type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label for="password"
+                            class="col-sm-3 col-form-label">
+                            Password
+                        </label>
+
+                        <div class="col-sm-8">
+
+                            <input type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label for="user_role"
+                            class="col-sm-3 col-form-label">
+                            User Role
+                        </label>
+
+                        <div class="col-sm-8">
+
+                            <select class="form-control"
+                                id="user_role"
+                                name="user_role">
+
+                                <option value="admin">
+                                    Administrator
+                                </option>
+
+                                <option value="operator">
+                                    Operator
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal">
+                        Tutup
+                    </button>
+
+                    <button type="submit"
+                        name="simpan"
+                        class="btn btn-primary">
+                        Simpan
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 <?php
 include_once('templates/footer.php');

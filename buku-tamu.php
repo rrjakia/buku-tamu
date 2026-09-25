@@ -12,7 +12,7 @@ include_once('templates/header.php');
     <?php
     // jika ada tombol simpan
     if (isset($_POST['simpan'])) {
-        if (tambah_tamu($_POST) > 0) {
+        if (tambah_users($_POST) > 0) {
     ?>
 
             <div class="alert alert-success" role="alert">

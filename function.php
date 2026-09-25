@@ -57,6 +57,46 @@ function tambah_tamu($data)
     return mysqli_affected_rows($koneksi);
 }
 
+
+// function tambah data user
+function tambah_user($data)
+{
+    global $koneksi;
+
+    // mengambil data user dari tabel dengan kode terbesar
+    $query = mysqli_query(
+        $koneksi,
+        "SELECT MAX(id_user) AS kodeTerbesar FROM users"
+    );
+
+    $dataTerbesar = mysqli_fetch_assoc($query);
+    $kodeuser = $dataTerbesar['kodeTerbesar'];
+
+    // mengambil angka dari kode user terbesar
+    $urutan = (int) substr($kodeuser, 3, 2);
+
+    // nomor yang diambil ditambah 1
+    $urutan++;
+
+    // membuat kode user baru
+    $huruf = "usr";
+    $kodeuser = $huruf . sprintf("%02s", $urutan);
+
+    $username = htmlspecialchars($data["username"]);
+    $password = htmlspecialchars($data["password"]);
+    $user_role = htmlspecialchars($data["user_role"]);
+
+    $query = "INSERT INTO users
+              (id_user, username, password, user_role)
+              VALUES
+              ('$kodeuser', '$username', '$password', '$user_role')";
+
+    mysqli_query($koneksi, $query);
+
+    return mysqli_affected_rows($koneksi);
+}
+
+
 // function ubah data tamu
 function ubah($data)
 {
@@ -81,6 +121,7 @@ function ubah($data)
 
     return mysqli_affected_rows($koneksi);
 }
+
 
 // function hapus data tamu
 function hapus_tamu($id)
