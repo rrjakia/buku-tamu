@@ -93,5 +93,3 @@ function hapus_tamu($id)
 
     return mysqli_affected_rows($koneksi);
 }
-
-echo "FUNCTION TERBACA";
